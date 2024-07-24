@@ -137,8 +137,24 @@ History Kode Toko
 <?php $__env->startSection('javascript'); ?>
 <script>
     $(document).ready(function() {
-        // Initialize datatable
-        $('#historyTable').DataTable();
+
+        $('#historyTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+            ]
+        });
+
     });
 
     function modalEdit(historyId) {

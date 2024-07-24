@@ -138,7 +138,22 @@ Area Sales
 <script>
     $(document).ready(function() {
         // Initialize datatable
-        $('#historyTable').DataTable();
+        $('#historyTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+            ]
+        });
     });
 
     function modalEdit(karyawanId) {

@@ -138,16 +138,31 @@ Penjualan
 <script>
     $(document).ready(function() {
         // Initialize datatable
-        $('#penjualanTable').DataTable();
+        $('#penjualanTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+            ]
+        });
     });
 
-    function modalEdit(karyawanId) {
+    function modalEdit(penjualanId) {
         $.ajax({
             type: 'POST',
             url: '<?php echo e(route("penjualan.getEditForm")); ?>',
             data: {
                 '_token': '<?php echo csrf_token() ?>',
-                'id': karyawanId,
+                'id': penjualanId,
             },
             success: function(data) {
                 $("#modalContent").html(data.msg);

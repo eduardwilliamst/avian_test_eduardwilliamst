@@ -29,12 +29,6 @@ Master Sales
                         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#addDataModalExcel">
                             <i class="fas fa-file-excel"></i> Upload File
                         </a>
-                        <a href="{{ route('sales.exportExcel') }}" class="btn btn-success">
-                            <i class="fas fa-file-excel"></i> Export Excel
-                        </a>
-                        <a href="{{ route('sales.exportPDF') }}" class="btn btn-danger">
-                            <i class="fas fa-file-pdf"></i> Export PDF
-                        </a>
                     </div>
                 </div>
             </div>
@@ -144,7 +138,22 @@ Master Sales
 <script>
     $(document).ready(function() {
         // Initialize datatable
-        $('#salesTable').DataTable();
+        $('#salesTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+            ]
+        });
     });
     
     function modalEdit(kodeSales) {
